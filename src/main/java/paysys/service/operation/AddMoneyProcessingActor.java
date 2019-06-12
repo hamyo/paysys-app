@@ -4,14 +4,9 @@ import akka.actor.AbstractActor;
 import akka.actor.Props;
 import akka.actor.Status;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import paysys.classifier.OperationStatusClassifier;
-import paysys.domain.Account;
 import paysys.domain.Operation;
-import paysys.repository.AccountRepository;
-import paysys.repository.OperationRepository;
 import paysys.service.account.AccountService;
-import paysys.utils.AppException;
 import paysys.utils.ExceptionUtils;
 
 @Slf4j
