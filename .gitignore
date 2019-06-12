@@ -1,3 +1,11 @@
+.idea
+*.iml
+target
+out
+build
+logs
+.gradle
+
 # Compiled class file
 *.class
 
