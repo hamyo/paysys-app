@@ -20,6 +20,7 @@ public class Application {
 
     /**
      * Start server
+     *
      * @param uri Uri for server
      * @return Started server
      */
@@ -42,6 +43,7 @@ public class Application {
                 System.in.read();
                 server.shutdownNow();
                 log.info("Jersey app stopped");
+                System.exit(0);
             }
         } catch (Exception e) {
             log.error("Service not started", e);
