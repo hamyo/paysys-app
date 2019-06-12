@@ -110,14 +110,14 @@ public class AccountControllerTest {
         AccountController accountController = new AccountController(accountService, system);
         Response resp = accountController.addMoney(account.getId(), BigDecimal.TEN);
         Assert.assertEquals(Response.Status.OK.getStatusCode(), resp.getStatus());
-        /*try {
-            Account expected = new Account(account.getId(), BigDecimal.TEN, account.getEmail());
-            // A pause is needed because the operation is processed asynchronously.
-            Thread.currentThread().sleep(5000);
-        } catch (Exception ex) {
-            throw new RuntimeException("Thread sleep error", ex);
-        }
-        Account actual = accountService.getById(account.getId());
-        Assert.assertEquals(expected, actual);*/
+//        try {
+//            Account expected = new Account(account.getId(), BigDecimal.TEN, account.getEmail());
+//            // A pause is needed because the operation is processed asynchronously.
+//            Thread.currentThread().sleep(5000);
+//        } catch (Exception ex) {
+//            throw new RuntimeException("Thread sleep error", ex);
+//        }
+//        Account actual = accountService.getById(account.getId());
+//        Assert.assertEquals(expected, actual);
     }
 }

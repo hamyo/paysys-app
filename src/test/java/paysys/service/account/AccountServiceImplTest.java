@@ -54,6 +54,19 @@ public class AccountServiceImplTest {
 
         accountService.increaseAccountBalance(actual.getId(), incAmount);
         Account changed = accountService.getById(actual.getId());
-        Assert.assertTrue(changed.getBalance().subtract(startBalance).compareTo(incAmount) == 0);
+        assertEquals(0, changed.getBalance().subtract(startBalance).compareTo(incAmount));
+    }
+
+    @Test
+    public void decreaseAccountBalance_ID1_AMOUNT100() {
+        BigDecimal incAmount = BigDecimal.valueOf(100);
+        AccountRepository accRepo = new AccountMemoryRepository();
+        AccountService accountService = new AccountServiceImpl(accRepo);
+        Account account = accountService.create("address@gmail.com");
+        account.setBalance(incAmount);
+        accRepo.update(account);
+        accountService.decreaseAccountBalance(account.getId(), incAmount);
+        Account changed = accountService.getById(account.getId());
+        Assert.assertTrue(BigDecimal.ZERO.compareTo(changed.getBalance()) == 0);
     }
 }
