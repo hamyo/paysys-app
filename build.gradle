@@ -32,10 +32,11 @@ dependencies {
 	testCompile "org.projectlombok:lombok:$lombock_version"
     
     compile "com.typesafe.akka:akka-actor_2.11:2.5.23"
-
+    
 	compile "ch.qos.logback:logback-core:$logback_version"
 	compile "ch.qos.logback:logback-classic:$logback_version"
-	
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile "org.mockito:mockito-core:2.28.2"
 }
@@ -45,8 +46,18 @@ jar.doFirst {
     manifest {
         //noinspection GroovyAssignabilityCheck
         attributes("Manifest-Version": "1.0",
-                "Main-Class": "paysys.Application")
+                "Main-Class": "paysys.Application",
+                "Class-Path": configurations.compile.collect { saveDep(it, buildDir.getAbsolutePath()) }.join(' '))
     }
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'paysys.Application'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 task wrapper(type: Wrapper) {
@@ -66,4 +77,18 @@ task migResources(dependsOn: 'jar') {
             out.close()
         }
     }
+}
+
+def saveDep(it, String path) {
+    def libs = file(path + File.separator + "libs")
+    if (!libs.exists()) {
+        libs.mkdirs();
+    }
+    def dirName = "lib"
+    def dir = file(path + File.separator + "libs" + File.separator + dirName)
+    if (!dir.exists()) dir.mkdirs()
+    if (it instanceof File) {
+        Files.copy(Paths.get(it.absolutePath), new FileOutputStream(new File(dir, it.name)))
+    }
+    dirName + "/" + it.name
 }
