@@ -4,11 +4,6 @@ import java.nio.file.Paths
 group 'paysys'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
 project.ext {
 	jersey_version = '2.26'
 	logback_version = '1.2.3'
@@ -16,6 +11,21 @@ project.ext {
     jacksonVersion = '2.9.9'
 }
 
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.3"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: "com.github.johnrengelman.shadow"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
 	mavenCentral()
@@ -35,7 +45,6 @@ dependencies {
     
 	compile "ch.qos.logback:logback-core:$logback_version"
 	compile "ch.qos.logback:logback-classic:$logback_version"
-    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile "org.mockito:mockito-core:2.28.2"
@@ -51,13 +60,12 @@ jar.doFirst {
     }
 }
 
-task fatJar(type: Jar) {
+shadowJar {
+    mergeServiceFiles()
     manifest {
-        attributes 'Main-Class': 'paysys.Application'
+        attributes("Manifest-Version": "1.0",
+                "Main-Class": "paysys.Application")
     }
-    baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
 }
 
 task wrapper(type: Wrapper) {
