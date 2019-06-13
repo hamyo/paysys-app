@@ -15,10 +15,11 @@ import paysys.utils.AppException;
 @Slf4j
 public class AddMoneyCreateActor extends AbstractActor {
     /**
-     *  Constructor for actor
-     * @param operationService Operation service
+     * Constructor for actor
+     *
+     * @param operationService   Operation service
      * @param accountExistsCheck Account exist check
-     * @param processActor Actor for further processing
+     * @param processActor       Actor for further processing
      */
     private AddMoneyCreateActor(OperationService operationService, AccountExistsCheck accountExistsCheck,
                                 ActorRef processActor) {
@@ -29,9 +30,10 @@ public class AddMoneyCreateActor extends AbstractActor {
 
     /**
      * Creates ActorRef configuration object
-     * @param operationService Operation service
+     *
+     * @param operationService   Operation service
      * @param accountExistsCheck Account exist check
-     * @param processActor Actor for further processing
+     * @param processActor       Actor for further processing
      * @return ActorRef configuration object
      */
     static public Props props(OperationService operationService, AccountExistsCheck accountExistsCheck,
@@ -57,6 +59,7 @@ public class AddMoneyCreateActor extends AbstractActor {
 
     /**
      * Creates a receive
+     *
      * @return Receive
      */
     @Override
@@ -78,10 +81,11 @@ public class AddMoneyCreateActor extends AbstractActor {
 
     /**
      * Message's handling
+     *
      * @param operation Handling operation
      * @return Saved operation
      */
-    Operation handleMessage(Operation operation) {
+    private Operation handleMessage(Operation operation) {
         String res = check(operation);
         if (StringUtils.isNotEmpty(res)) {
             throw new AppException(res);
@@ -92,6 +96,7 @@ public class AddMoneyCreateActor extends AbstractActor {
 
     /**
      * Internal check
+     *
      * @param operation Handling operation
      * @return Check's error
      */

@@ -17,6 +17,7 @@ public class OperationServiceImpl implements OperationService {
 
     /**
      * Constructor for service
+     *
      * @param operationRepository Operations repository
      */
     public OperationServiceImpl(OperationRepository operationRepository) {
@@ -25,7 +26,8 @@ public class OperationServiceImpl implements OperationService {
 
     /**
      * Sets operation's status to error with message
-     * @param id Operation's id
+     *
+     * @param id      Operation's id
      * @param message Error message
      */
     @Override
@@ -35,6 +37,7 @@ public class OperationServiceImpl implements OperationService {
 
     /**
      * Sets operation's status to success
+     *
      * @param id Operation's id
      */
     @Override
@@ -44,6 +47,7 @@ public class OperationServiceImpl implements OperationService {
 
     /**
      * Sets operation's status to processing
+     *
      * @param id Operation's id
      */
     @Override
@@ -53,8 +57,9 @@ public class OperationServiceImpl implements OperationService {
 
     /**
      * Sets operation's status
-     * @param id Operation's id
-     * @param status Operation's status
+     *
+     * @param id      Operation's id
+     * @param status  Operation's status
      * @param message Operation's message
      */
     private void setOperationStatus(@NonNull Long id, @NonNull OperationStatusClassifier status, String message) {
@@ -69,6 +74,7 @@ public class OperationServiceImpl implements OperationService {
 
     /**
      * Save new operation in repository
+     *
      * @param operation New operation
      * @return Saved operation
      */
@@ -79,6 +85,7 @@ public class OperationServiceImpl implements OperationService {
 
     /**
      * Get operation by Id
+     *
      * @param id Id of needing operation
      * @return {@code Operation} object
      */

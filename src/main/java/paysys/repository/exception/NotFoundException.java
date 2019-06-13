@@ -11,8 +11,9 @@ public class NotFoundException extends RepositoryException {
 
     /**
      * Constructs a new exception by message
+     *
      * @param entity Entity's name
-     * @param key Key value
+     * @param key    Key value
      */
     public NotFoundException(String entity, String key) {
         super("Object not found", entity);
@@ -21,7 +22,8 @@ public class NotFoundException extends RepositoryException {
 
     /**
      * Returns the detail message string of this exception.
-     * @return  detail message string
+     *
+     * @return detail message string
      */
     @Override
     public String getMessage() {

@@ -17,8 +17,9 @@ public class AddMoneyProcessingActor extends AbstractActor {
 
     /**
      * Constructor for actor
+     *
      * @param operationService Operation service
-     * @param accountService Account service
+     * @param accountService   Account service
      */
     private AddMoneyProcessingActor(OperationService operationService, AccountService accountService) {
         this.operationService = operationService;
@@ -27,8 +28,9 @@ public class AddMoneyProcessingActor extends AbstractActor {
 
     /**
      * Creates ActorRef configuration object
+     *
      * @param operationService Operation service
-     * @param accountService Account service
+     * @param accountService   Account service
      * @return ActorRef configuration object
      */
     static public Props props(OperationService operationService, AccountService accountService) {
@@ -47,6 +49,7 @@ public class AddMoneyProcessingActor extends AbstractActor {
 
     /**
      * Creates a receive
+     *
      * @return Receive
      */
     @Override
@@ -68,15 +71,15 @@ public class AddMoneyProcessingActor extends AbstractActor {
 
     /**
      * Message's handling
+     *
      * @param operationId Id of handling operation
      */
-    void handleMessage(Long operationId) {
+    private void handleMessage(Long operationId) {
         operationService.setOperationProcessing(operationId);
         Operation operation = operationService.getById(operationId);
         accountService.increaseAccountBalance(operation.getAccountId(), operation.getSum());
         operationService.setOperationSuccess(operationId);
     }
-
 
 
 }

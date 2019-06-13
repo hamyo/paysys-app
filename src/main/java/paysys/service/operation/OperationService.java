@@ -21,6 +21,7 @@ public interface OperationService {
 
     /**
      * Sets operation's status to processing
+     *
      * @param id Operation's id
      */
     void setOperationProcessing(Long id);

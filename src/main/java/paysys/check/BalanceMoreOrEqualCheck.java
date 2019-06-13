@@ -17,6 +17,7 @@ public class BalanceMoreOrEqualCheck {
 
     /**
      * Constructor fo check
+     *
      * @param accountRepository Repository of accounts
      */
     public BalanceMoreOrEqualCheck(AccountRepository accountRepository) {
@@ -25,8 +26,9 @@ public class BalanceMoreOrEqualCheck {
 
     /**
      * Check balance
+     *
      * @param accountId Account's id
-     * @param amount Value to compare
+     * @param amount    Value to compare
      * @return Error message
      */
     public String check(@NonNull Long accountId, @NonNull BigDecimal amount) {

@@ -52,11 +52,12 @@ public class AccountController {
 
     /**
      * Constructor for controller
+     *
      * @param accountService Account's service
-     * @param actorSystem Actor's System
-     * @param configuration HttpServer configuration
+     * @param actorSystem    Actor's System
+     * @param configuration  HttpServer configuration
      */
-    public AccountController(AccountService accountService, ActorSystem actorSystem, Configuration configuration) {
+    AccountController(AccountService accountService, ActorSystem actorSystem, Configuration configuration) {
         this.accountService = accountService;
         this.actorSystem = actorSystem;
         this.configuration = configuration;
@@ -71,6 +72,7 @@ public class AccountController {
 
     /**
      * Creates account
+     *
      * @param email Account's email. Required
      * @return Response with created account if success, response with error description if failed
      */
@@ -95,6 +97,7 @@ public class AccountController {
 
     /**
      * Gets account by Id
+     *
      * @param id Account's id. Required
      * @return Response with account if success, response with error description if failed
      */
@@ -120,7 +123,8 @@ public class AccountController {
 
     /**
      * Check of transfer operation parameters
-     * @param sum Operation's sum
+     *
+     * @param sum        Operation's sum
      * @param receiverId Receiver's id
      * @return Error's message
      */
@@ -139,6 +143,7 @@ public class AccountController {
 
     /**
      * Check operation's sum
+     *
      * @param sum Operation's sum
      * @return Error's message
      */
@@ -153,8 +158,9 @@ public class AccountController {
 
     /**
      * Creates transfer operation
-     * @param id Account's id. Required
-     * @param sum Operation's sum. Required. Must be a positive
+     *
+     * @param id         Account's id. Required
+     * @param sum        Operation's sum. Required. Must be a positive
      * @param receiverId Receiver account id. Required
      * @return Response with operation if success, response with error description if failed
      */
@@ -187,7 +193,8 @@ public class AccountController {
 
     /**
      * Creates operation for money adding
-     * @param id Account's id. Required
+     *
+     * @param id  Account's id. Required
      * @param sum Operation's sum. Required. Must be a positive
      * @return Response with operation if success, response with error description if failed
      */
@@ -218,6 +225,7 @@ public class AccountController {
 
     /**
      * Gets operation's timeout
+     *
      * @return Operation's timeout
      */
     private Long getOperationTimeout() {

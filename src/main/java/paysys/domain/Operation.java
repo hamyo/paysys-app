@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 /**
  * Account's operation
  */
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"createTime"})
 @Getter
 @AllArgsConstructor
 public class Operation {
@@ -59,11 +59,12 @@ public class Operation {
 
     /**
      * Constructor for new operation
+     *
      * @param createTime Creation's date with time
-     * @param accountId Account's identifier
-     * @param status Operation's status
-     * @param type Operation's type
-     * @param sum Operation's sum
+     * @param accountId  Account's identifier
+     * @param status     Operation's status
+     * @param type       Operation's type
+     * @param sum        Operation's sum
      */
     protected Operation(LocalDateTime createTime, Long accountId, OperationStatusClassifier status,
                         OperationTypeClassifier type, BigDecimal sum) {
@@ -76,14 +77,15 @@ public class Operation {
 
     /**
      * Constructor for new operation
-     * @param createTime Creation's date with time
-     * @param accountId Account's identifier
-     * @param status Operation's status
-     * @param type Operation's type
-     * @param sum Operation's sum
-     * @param senderId
-     * @param receverId
-     * @param parentOperationId
+     *
+     * @param createTime        Creation's date with time
+     * @param accountId         Account's identifier
+     * @param status            Operation's status
+     * @param type              Operation's type
+     * @param sum               Operation's sum
+     * @param senderId          Sender account identifier
+     * @param receverId         Receiver account identifier
+     * @param parentOperationId Parent operation's identifier
      */
     protected Operation(LocalDateTime createTime, Long accountId, OperationStatusClassifier status,
                         OperationTypeClassifier type, BigDecimal sum, Long senderId, Long receverId,
@@ -100,8 +102,9 @@ public class Operation {
 
     /**
      * Creates new operation for adding money to account
+     *
      * @param accountId Account's identifier
-     * @param sum Operation's sum
+     * @param sum       Operation's sum
      * @return New operation
      */
     public static Operation ofNewAddMoney(Long accountId, BigDecimal sum) {
@@ -111,10 +114,11 @@ public class Operation {
 
     /**
      * Creates new operation for transfer money from one account to another
-     * @param accountId Account's identifier
-     * @param sum Operation's sum
-     * @param senderId Sender account identifier
-     * @param receverId Receiver account identifier
+     *
+     * @param accountId         Account's identifier
+     * @param sum               Operation's sum
+     * @param senderId          Sender account identifier
+     * @param receverId         Receiver account identifier
      * @param parentOperationId Parent operation's identifier
      * @return New operation
      */
@@ -126,6 +130,7 @@ public class Operation {
 
     /**
      * Copies data to new object
+     *
      * @return New operation
      */
     public Operation copy() {
@@ -134,6 +139,7 @@ public class Operation {
 
     /**
      * Copies data to new object with specified ID
+     *
      * @param id Operation's id
      * @return New object with specified ID
      */
@@ -145,6 +151,7 @@ public class Operation {
 
     /**
      * Sets new status for operation
+     *
      * @param status New status
      */
     public void setStatus(OperationStatusClassifier status) {
@@ -153,6 +160,7 @@ public class Operation {
 
     /**
      * Sets message for operation
+     *
      * @param message Message
      */
     public void setMessage(String message) {

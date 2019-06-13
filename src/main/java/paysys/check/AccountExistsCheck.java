@@ -15,6 +15,7 @@ public class AccountExistsCheck {
 
     /**
      * Constructor fo check
+     *
      * @param accountRepository Repository of accounts
      */
     public AccountExistsCheck(AccountRepository accountRepository) {
@@ -23,6 +24,7 @@ public class AccountExistsCheck {
 
     /**
      * Check for account's existing
+     *
      * @param accountId Account's id
      * @return Error message
      */

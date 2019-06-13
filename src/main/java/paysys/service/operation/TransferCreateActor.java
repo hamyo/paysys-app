@@ -17,10 +17,11 @@ import paysys.utils.AppException;
 public class TransferCreateActor extends AbstractActor {
     /**
      * Constructor for actor
-     * @param operationService Operation service
+     *
+     * @param operationService        Operation service
      * @param balanceMoreOrEqualCheck Balance check
-     * @param accountExistsCheck Account exist check
-     * @param processActor Actor for further processing
+     * @param accountExistsCheck      Account exist check
+     * @param processActor            Actor for further processing
      */
     private TransferCreateActor(OperationService operationService, BalanceMoreOrEqualCheck balanceMoreOrEqualCheck,
                                 AccountExistsCheck accountExistsCheck, ActorRef processActor) {
@@ -31,11 +32,10 @@ public class TransferCreateActor extends AbstractActor {
     }
 
     /**
-     *
-     * @param operationService Operation service
+     * @param operationService        Operation service
      * @param balanceMoreOrEqualCheck Balance check
-     * @param accountExistsCheck Account exist check
-     * @param processActor Actor for further processing
+     * @param accountExistsCheck      Account exist check
+     * @param processActor            Actor for further processing
      * @return ActorRef configuration object
      */
     static public Props props(OperationService operationService, BalanceMoreOrEqualCheck balanceMoreOrEqualCheck,
@@ -63,6 +63,7 @@ public class TransferCreateActor extends AbstractActor {
 
     /**
      * Creates a receive
+     *
      * @return Receive
      */
     @Override
@@ -84,10 +85,11 @@ public class TransferCreateActor extends AbstractActor {
 
     /**
      * Message's handling
+     *
      * @param operation Handling operation
      * @return Saved operation
      */
-    Operation handleMessage(Operation operation) {
+    private Operation handleMessage(Operation operation) {
         String checkResult = check(operation);
         if (StringUtils.isNotEmpty(checkResult)) {
             throw new AppException(checkResult);
@@ -98,10 +100,11 @@ public class TransferCreateActor extends AbstractActor {
 
     /**
      * Internal check
+     *
      * @param operation Handling operation
      * @return Check's error
      */
-    String check(Operation operation) {
+    private String check(Operation operation) {
         String checkResult = accountExistsCheck.check(operation.getSenderId());
         if (StringUtils.isNotEmpty(checkResult)) {
             return checkResult;

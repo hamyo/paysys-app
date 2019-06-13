@@ -4,6 +4,7 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import lombok.extern.slf4j.Slf4j;
+import paysys.classifier.OperationStatusClassifier;
 import paysys.domain.Operation;
 import paysys.service.account.AccountService;
 import paysys.utils.ExceptionUtils;
@@ -62,7 +63,7 @@ public class TransferProcessingActor extends AbstractActor {
                     try {
                         Operation receiverOperation = handleMessage(id);
 
-                        getSender().tell(true, getSelf());
+                        getSender().tell(OperationStatusClassifier.SUCCESS, getSelf());
                         receiverProcessActor.tell(receiverOperation.getId(), ActorRef.noSender());
                     } catch (Exception ex) {
                         log.error(String.format("Error processing message (id=%s).", id), ex);
@@ -79,7 +80,7 @@ public class TransferProcessingActor extends AbstractActor {
      *
      * @param id Id of handling operation
      */
-    Operation handleMessage(Long id) {
+    private Operation handleMessage(Long id) {
         operationService.setOperationProcessing(id);
         Operation operation = operationService.getById(id);
         accountService.decreaseAccountBalance(operation.getSenderId(), operation.getSum());

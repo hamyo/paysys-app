@@ -16,6 +16,7 @@ public interface AccountRepository {
 
     /**
      * Get account by Id
+     *
      * @param id Id of needing account
      * @return {@code Account} object
      */
