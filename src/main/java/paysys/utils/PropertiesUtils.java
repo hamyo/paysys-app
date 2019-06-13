@@ -1,7 +1,5 @@
 package paysys.utils;
 
-import org.apache.commons.lang.StringUtils;
-
 import java.io.*;
 import java.util.Properties;
 
@@ -12,6 +10,7 @@ public class PropertiesUtils {
 
     /**
      * Returns {@code Properties} from file
+     *
      * @param fileName Name of property file
      * @return {@code Properties} from file
      * @throws FileNotFoundException if file was not found
@@ -29,6 +28,7 @@ public class PropertiesUtils {
 
     /**
      * Returns {@code Properties} from stream
+     *
      * @param inputStream stream
      * @return {@code Properties} from stream
      */
@@ -44,6 +44,7 @@ public class PropertiesUtils {
 
     /**
      * Returns uri for service from property file
+     *
      * @param fileName Name of property file
      * @return uri for service
      * @throws FileNotFoundException if file was not found

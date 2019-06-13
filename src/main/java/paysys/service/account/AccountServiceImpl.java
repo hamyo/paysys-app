@@ -1,9 +1,7 @@
 package paysys.service.account;
 
 import lombok.NonNull;
-import org.apache.commons.lang.StringUtils;
 import paysys.domain.Account;
-import paysys.domain.Operation;
 import paysys.repository.AccountRepository;
 import paysys.utils.AppException;
 
@@ -15,12 +13,13 @@ import java.math.BigDecimal;
 public class AccountServiceImpl implements AccountService {
 
     /**
-     * Account repository
+     * Accounts repository
      */
     private AccountRepository accountRepository;
 
     /**
      * Constructor with account repository
+     *
      * @param accountRepository Account repository
      */
     public AccountServiceImpl(AccountRepository accountRepository) {
@@ -29,6 +28,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Get account by Id from repository
+     *
      * @param id Account ID
      * @return Account
      */
@@ -39,6 +39,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Create account by email
+     *
      * @param email Account email
      * @return Created accounted from repository
      */
@@ -50,7 +51,8 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Increase account balance
-     * @param id Account Id
+     *
+     * @param id     Account Id
      * @param amount Amount by which the balance will increase
      * @throws AppException if Account was not found
      */
@@ -71,10 +73,11 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Decrease account balance
-     * @param id Account Id
+     *
+     * @param id     Account Id
      * @param amount Amount by which the balance will decrease
      * @throws AppException if Account was not found
-     * * @throws AppException if balance is smaller then amount
+     *                      * @throws AppException if balance is smaller then amount
      */
     public void decreaseAccountBalance(@NonNull Long id, @NonNull BigDecimal amount) {
         accountRepository.lock(id);

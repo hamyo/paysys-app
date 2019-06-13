@@ -1,5 +1,8 @@
 package paysys.classifier;
 
+/**
+ * Operation's type
+ */
 public enum OperationTypeClassifier {
     /**
      * Money transfer

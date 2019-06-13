@@ -8,9 +8,9 @@ import paysys.domain.Operation;
 public interface OperationRepository {
 
     /**
-     * Save account in repository
+     * Save new operation in repository
      *
-     * @param operation Account for saving
+     * @param operation New operation for saving
      * @return Saved operation
      */
     Operation save(Operation operation);

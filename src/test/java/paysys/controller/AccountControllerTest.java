@@ -6,7 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import paysys.check.AccountExistsCheck;
 import paysys.check.BalanceMoreOrEqualCheck;
+import paysys.classifier.OperationStatusClassifier;
 import paysys.domain.Account;
+import paysys.domain.Operation;
 import paysys.repository.AccountMemoryRepository;
 import paysys.repository.AccountRepository;
 import paysys.repository.OperationMemoryRepository;
@@ -81,7 +83,7 @@ public class AccountControllerTest {
 
         AccountController accountController = new AccountController(accountService, system);
         Response resp = accountController.transfer(sender.getId(), BigDecimal.TEN, receiver.getId());
-        Assert.assertEquals(Response.Status.OK.getStatusCode(), resp.getStatus());
+        Assert.assertEquals(OperationStatusClassifier.CREATE, ((Operation)resp.getEntity()).getStatus());
 //        try {
 //            // A pause is needed because the operation is processed asynchronously.
 //            Thread.currentThread().sleep(5000);
@@ -109,7 +111,7 @@ public class AccountControllerTest {
         Account account = accountService.create("address@gmial.com");
         AccountController accountController = new AccountController(accountService, system);
         Response resp = accountController.addMoney(account.getId(), BigDecimal.TEN);
-        Assert.assertEquals(Response.Status.OK.getStatusCode(), resp.getStatus());
+        Assert.assertEquals(OperationStatusClassifier.CREATE, ((Operation)resp.getEntity()).getStatus());
 //        try {
 //            Account expected = new Account(account.getId(), BigDecimal.TEN, account.getEmail());
 //            // A pause is needed because the operation is processed asynchronously.

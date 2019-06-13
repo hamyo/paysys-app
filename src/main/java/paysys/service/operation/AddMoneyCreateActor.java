@@ -9,8 +9,17 @@ import paysys.check.AccountExistsCheck;
 import paysys.domain.Operation;
 import paysys.utils.AppException;
 
+/**
+ * Creates new operation for adding money to account
+ */
 @Slf4j
 public class AddMoneyCreateActor extends AbstractActor {
+    /**
+     *  Constructor for actor
+     * @param operationService Operation service
+     * @param accountExistsCheck Account exist check
+     * @param processActor Actor for further processing
+     */
     private AddMoneyCreateActor(OperationService operationService, AccountExistsCheck accountExistsCheck,
                                 ActorRef processActor) {
         this.operationService = operationService;
@@ -18,16 +27,38 @@ public class AddMoneyCreateActor extends AbstractActor {
         this.processActor = processActor;
     }
 
+    /**
+     * Creates ActorRef configuration object
+     * @param operationService Operation service
+     * @param accountExistsCheck Account exist check
+     * @param processActor Actor for further processing
+     * @return ActorRef configuration object
+     */
     static public Props props(OperationService operationService, AccountExistsCheck accountExistsCheck,
                               ActorRef processActor) {
         return Props.create(AddMoneyCreateActor.class, () -> new AddMoneyCreateActor(operationService,
                 accountExistsCheck, processActor));
     }
 
+    /**
+     * Operation service
+     */
     private OperationService operationService;
+
+    /**
+     * Account exist check
+     */
     private AccountExistsCheck accountExistsCheck;
+
+    /**
+     * Actor for further processing
+     */
     private ActorRef processActor;
 
+    /**
+     * Creates a receive
+     * @return Receive
+     */
     @Override
     public Receive createReceive() {
         return receiveBuilder()
@@ -45,16 +76,26 @@ public class AddMoneyCreateActor extends AbstractActor {
                 .build();
     }
 
-    Operation handleMessage(Operation op) {
-        String res = check(op);
+    /**
+     * Message's handling
+     * @param operation Handling operation
+     * @return Saved operation
+     */
+    Operation handleMessage(Operation operation) {
+        String res = check(operation);
         if (StringUtils.isNotEmpty(res)) {
             throw new AppException(res);
         }
 
-        return operationService.save(op);
+        return operationService.save(operation);
     }
 
-    String check(Operation op) {
-        return accountExistsCheck.check(op.getAccountId());
+    /**
+     * Internal check
+     * @param operation Handling operation
+     * @return Check's error
+     */
+    private String check(Operation operation) {
+        return accountExistsCheck.check(operation.getAccountId());
     }
 }

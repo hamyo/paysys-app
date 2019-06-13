@@ -27,7 +27,7 @@ public class Account {
     private String email;
 
     /**
-     * Constructor for Account
+     * Constructor for Account by email. Balance is setted to 0
      *
      * @param email Account's email
      */
