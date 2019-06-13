@@ -41,13 +41,14 @@ dependencies {
 	compileOnly "org.projectlombok:lombok:$lombock_version"
 	testCompile "org.projectlombok:lombok:$lombock_version"
     
-    compile "com.typesafe.akka:akka-actor_2.11:2.5.23"
+    compile "com.typesafe.akka:akka-actor_2.11:2.5.12"
     
 	compile "ch.qos.logback:logback-core:$logback_version"
 	compile "ch.qos.logback:logback-classic:$logback_version"
     
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile "org.mockito:mockito-core:2.28.2"
+    testCompile "com.typesafe.akka:akka-testkit-typed_2.11:2.5.12"
 }
 
 
