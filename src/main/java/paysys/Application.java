@@ -8,6 +8,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import paysys.utils.PropertiesUtils;
 
+import java.io.FileNotFoundException;
 import java.net.URI;
 
 @Slf4j
@@ -21,32 +22,33 @@ public class Application {
     /**
      * Start server
      *
-     * @param uri Uri for server
      * @return Started server
+     * @throws FileNotFoundException if property file was not found
      */
-    private static HttpServer startServer(String uri) {
+    private static HttpServer startServer() throws FileNotFoundException {
+        String uri = PropertiesUtils.getServiceUri(APP_PROP_FILE_NAME);
+        if (StringUtils.isEmpty(uri)) {
+            throw new IllegalStateException(String.format("Service not started. No %s in the file %s",
+                    PropertiesUtils.getServiceUriParamName(), APP_PROP_FILE_NAME));
+        }
         ResourceConfig rc = new ResourceConfig().packages("paysys.controller");
         rc.property(ServerProperties.RESPONSE_SET_STATUS_OVER_SEND_ERROR, "true");
         rc.register(new ApplicationBinder());
+        rc.property(PropertiesUtils.getOperationTimeoutParamName(), PropertiesUtils.getOperationTimeout(APP_PROP_FILE_NAME));
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(uri), rc);
     }
 
     public static void main(String[] args) {
         try {
-            String uri = PropertiesUtils.getServiceUri(APP_PROP_FILE_NAME);
-            if (StringUtils.isEmpty(uri)) {
-                log.error("Service not started. No url in the file {}", APP_PROP_FILE_NAME);
-            } else {
-                HttpServer server = startServer(uri);
-                log.info("Jersey app started. It is available at {}", uri);
-                System.out.println("Hit enter to stop it...");
-                System.in.read();
-                server.shutdownNow();
-                log.info("Jersey app stopped");
-                System.exit(0);
-            }
+            HttpServer server = startServer();
+            log.info("Jersey app started.");
+            System.out.println("Hit enter to stop it...");
+            System.in.read();
+            server.shutdownNow();
+            log.info("Jersey app stopped.");
+            System.exit(0);
         } catch (Exception e) {
-            log.error("Service not started", e);
+            log.error("Service not started.", e);
         }
     }
 

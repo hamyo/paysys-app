@@ -14,6 +14,7 @@ public class ErrorResponseInfo {
 
     /**
      * Constructor by error's information
+     *
      * @param error Information about error
      */
     private ErrorResponseInfo(String error) {
@@ -22,6 +23,7 @@ public class ErrorResponseInfo {
 
     /**
      * Creates new {@code ErrorResponseInfo} by error's information
+     *
      * @param error Information about error
      * @return Information for error response
      */

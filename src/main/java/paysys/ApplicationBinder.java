@@ -40,7 +40,6 @@ public class ApplicationBinder extends AbstractBinder {
         BalanceMoreOrEqualCheck balanceMoreOrEqualCheck = new BalanceMoreOrEqualCheck(accRepo);
         AccountExistsCheck accountExistsCheck = new AccountExistsCheck(accRepo);
 
-
         // actors
         ActorSystem system = ActorSystem.create("paysys");
 

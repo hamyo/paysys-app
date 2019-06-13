@@ -9,10 +9,11 @@ public abstract class ExceptionUtils {
     /**
      * Internal error text
      */
-    public static final String INTERNAL_ERROR_TEXT = "Внутренняя ошибка";
+    private static final String INTERNAL_ERROR_TEXT = "Внутренняя ошибка";
 
     /**
      * Get error message for api consumers
+     *
      * @param ex Exception
      * @return Message for consumers
      */

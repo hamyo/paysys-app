@@ -7,6 +7,7 @@ public class AppException extends RuntimeException {
 
     /**
      * Constructs a new exception by message
+     *
      * @param message Error message
      */
     public AppException(String message) {

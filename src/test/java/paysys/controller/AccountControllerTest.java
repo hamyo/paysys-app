@@ -16,7 +16,9 @@ import paysys.repository.OperationRepository;
 import paysys.service.account.AccountService;
 import paysys.service.account.AccountServiceImpl;
 import paysys.service.operation.*;
+import paysys.utils.PropertiesUtils;
 
+import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.Response;
 
 import java.math.BigDecimal;
@@ -33,7 +35,8 @@ public class AccountControllerTest {
         Account expected = new Account(1L, BigDecimal.ZERO, "address@gmial.com");
         when(accountService.create("address@gmial.com")).thenReturn(expected);
         ActorSystem system = mock(ActorSystem.class);
-        AccountController accountController = new AccountController(accountService, system);
+        Configuration configuration = mock(Configuration.class);
+        AccountController accountController = new AccountController(accountService, system, configuration);
         Response resp = accountController.create("address@gmial.com");
         Object actual = resp.getEntity();
         Assert.assertEquals(expected, actual);
@@ -45,7 +48,8 @@ public class AccountControllerTest {
         Account expected = new Account(1L, BigDecimal.TEN, "address@gmial.com");
         when(accountService.getById(1L)).thenReturn(expected);
         ActorSystem system = mock(ActorSystem.class);
-        AccountController accountController = new AccountController(accountService, system);
+        Configuration configuration = mock(Configuration.class);
+        AccountController accountController = new AccountController(accountService, system, configuration);
         Response resp = accountController.get(1L);
         Object actual = resp.getEntity();
         Assert.assertEquals(expected, actual);
@@ -56,7 +60,8 @@ public class AccountControllerTest {
         AccountService accountService = mock(AccountService.class);
         when(accountService.getById(1L)).thenReturn(null);
         ActorSystem system = mock(ActorSystem.class);
-        AccountController accountController = new AccountController(accountService, system);
+        Configuration configuration = mock(Configuration.class);
+        AccountController accountController = new AccountController(accountService, system, configuration);
         Response resp = accountController.get(1L);
         Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), resp.getStatus());
     }
@@ -81,7 +86,9 @@ public class AccountControllerTest {
         accountService.increaseAccountBalance(sender.getId(), BigDecimal.TEN);
         Account receiver = accountService.create("address@gmial.com");
 
-        AccountController accountController = new AccountController(accountService, system);
+        Configuration configuration = mock(Configuration.class);
+        when(configuration.getProperty(PropertiesUtils.getOperationTimeoutParamName())).thenReturn(5L);
+        AccountController accountController = new AccountController(accountService, system, configuration);
         Response resp = accountController.transfer(sender.getId(), BigDecimal.TEN, receiver.getId());
         Assert.assertEquals(OperationStatusClassifier.CREATE, ((Operation)resp.getEntity()).getStatus());
 //        try {
@@ -108,8 +115,11 @@ public class AccountControllerTest {
         ActorRef processAddMoney = system.actorOf(AddMoneyProcessingActor.props(operationService, accountService), "processAddMoney");
         system.actorOf(AddMoneyCreateActor.props(operationService, accountExistsCheck, processAddMoney), "createAddMoney");
 
+        Configuration configuration = mock(Configuration.class);
+        when(configuration.getProperty(PropertiesUtils.getOperationTimeoutParamName())).thenReturn(5L);
+
         Account account = accountService.create("address@gmial.com");
-        AccountController accountController = new AccountController(accountService, system);
+        AccountController accountController = new AccountController(accountService, system, configuration);
         Response resp = accountController.addMoney(account.getId(), BigDecimal.TEN);
         Assert.assertEquals(OperationStatusClassifier.CREATE, ((Operation)resp.getEntity()).getStatus());
 //        try {
