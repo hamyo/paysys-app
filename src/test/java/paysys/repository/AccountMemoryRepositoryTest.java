@@ -6,8 +6,6 @@ import paysys.domain.Account;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
-
 public class AccountMemoryRepositoryTest {
 
     @Test

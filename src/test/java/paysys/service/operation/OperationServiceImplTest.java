@@ -1,20 +1,17 @@
 package paysys.service.operation;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import paysys.classifier.OperationStatusClassifier;
 import paysys.classifier.OperationTypeClassifier;
 import paysys.domain.Operation;
-import paysys.repository.AccountRepository;
 import paysys.repository.OperationMemoryRepository;
 import paysys.repository.OperationRepository;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

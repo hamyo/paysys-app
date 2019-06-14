@@ -20,10 +20,8 @@ import paysys.utils.PropertiesUtils;
 
 import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.Response;
-
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -90,7 +88,7 @@ public class AccountControllerTest {
         when(configuration.getProperty(PropertiesUtils.getOperationTimeoutParamName())).thenReturn(5L);
         AccountController accountController = new AccountController(accountService, system, configuration);
         Response resp = accountController.transfer(sender.getId(), BigDecimal.TEN, receiver.getId());
-        Assert.assertEquals(OperationStatusClassifier.CREATE, ((Operation)resp.getEntity()).getStatus());
+        Assert.assertEquals(OperationStatusClassifier.CREATE, ((Operation) resp.getEntity()).getStatus());
 //        try {
 //            // A pause is needed because the operation is processed asynchronously.
 //            Thread.currentThread().sleep(5000);
@@ -121,7 +119,7 @@ public class AccountControllerTest {
         Account account = accountService.create("address@gmial.com");
         AccountController accountController = new AccountController(accountService, system, configuration);
         Response resp = accountController.addMoney(account.getId(), BigDecimal.TEN);
-        Assert.assertEquals(OperationStatusClassifier.CREATE, ((Operation)resp.getEntity()).getStatus());
+        Assert.assertEquals(OperationStatusClassifier.CREATE, ((Operation) resp.getEntity()).getStatus());
 //        try {
 //            Account expected = new Account(account.getId(), BigDecimal.TEN, account.getEmail());
 //            // A pause is needed because the operation is processed asynchronously.
