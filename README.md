@@ -22,30 +22,30 @@ Run witn your logback settings<br/>
 
 ## Settings
 There are setting in application.propperties file. Parameters:
-- base.uri. Uri for web service
-- operation.timeout. Timeout of an asynchronous operations (in seconds): money's adding and transfer money from one account to another. 
+- `base.uri`. Uri for web service
+- `operation.timeout`. Timeout of an asynchronous operations (in seconds): money's adding and transfer money from one account to another. 
 
 ## API methods:
 - `<base.uri>/accounts` [POST]. 
-Parameters: String email - account's email (required).<br/>
+Parameters: `String email` - account's email (required).<br/>
 Creates account by email.<br/>
 Returns created account.<br/>
 Example of call for curl: `curl.exe -d "email=address@gmail.com" "http://localhost:2222/accounts"`
 
 - `<base.uri>/accounts/<id>` [GET]. 
-Parameters: Long id - account's id (required).<br/>
+Parameters: `Long id` - account's id (required).<br/>
 Gets account by id.<br/>
 Returns found account.<br/>
 Example of call for curl: `curl.exe "http://localhost:2222/accounts/1"`
 
 - `<base.uri>/accounts/<id>/operations/transfer` [POST]. 
-Parameters: Long id - account's id (required), BigDecimal sum - operation's sum (required, must be a positive), Long receiverId - (required).<br/>
+Parameters: `Long id` - account's id (required), `BigDecimal sum` - operation's sum (required, must be a positive), `Long receiverId` - receiver account id (required).<br/>
 Creates operation for transfer money from one account to another and asynchronously handles it.<br/>
 Returns created operation.<br/>
 Example of call for curl: `curl.exe -d "sum=10.2&receiverId=2" "http://localhost:2222/accounts/1/operations/transfer"`
 
 - `<base.uri>/accounts/<id>/operations/addmoney` [POST]. 
-Parameters: Long id - account's id (required), BigDecimal sum - operation's sum (required, must be a positive).<br/>
+Parameters: `Long id` - account's id (required), `BigDecimal sum` - operation's sum (required, must be a positive).<br/>
 Creates operation for money's adding to account and asynchronously handles it.<br/>
 Returns created operation.<br/>
 Example of call for curl: `curl.exe -d "sum=10.2" "http://localhost:2222/accounts/1/operations/addmoney"`
