@@ -31,6 +31,8 @@ repositories {
 	mavenCentral()
 }
 
+compileJava.options.encoding = 'UTF-8'
+
 dependencies {
 	compile "org.glassfish.jersey.containers:jersey-container-grizzly2-http:$jersey_version"
 	compile "org.glassfish.jersey.inject:jersey-hk2:$jersey_version"
