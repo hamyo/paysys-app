@@ -31,7 +31,7 @@ public class AccountExistsCheck {
     public String check(@NonNull Long accountId) {
         Account account = accountRepository.getById(accountId);
         if (account == null) {
-            return String.format("Нет счета с id=%s.", accountId);
+            return String.format("Account with id=%s not found.", accountId);
         } else {
             return "";
         }

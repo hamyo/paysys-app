@@ -34,9 +34,9 @@ public class BalanceMoreOrEqualCheck {
     public String check(@NonNull Long accountId, @NonNull BigDecimal amount) {
         Account account = accountRepository.getById(accountId);
         if (account == null) {
-            return String.format("Нет счета с id=%s", accountId);
+            return String.format("Account with id=%s not found.", accountId);
         } else if (account.getBalance().compareTo(amount) < 0) {
-            return String.format("Баланс %s меньше указанной величины %s", account.getBalance(), amount);
+            return String.format("Account's balanse %s is less then amount %s", account.getBalance(), amount);
         } else {
             return "";
         }
