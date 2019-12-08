@@ -71,10 +71,6 @@ shadowJar {
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.0.1'
-}
-
 task migResources(dependsOn: 'jar') {
     def libs = file(buildDir.getAbsolutePath() + File.separator + "libs")
     if (!libs.exists()) {

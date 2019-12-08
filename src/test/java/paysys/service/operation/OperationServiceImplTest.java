@@ -47,7 +47,7 @@ public class OperationServiceImplTest {
     }
 
     @Test
-    public void getById_ID1_Exist() {
+    public void getById1Exist() {
         LocalDateTime nowDt = LocalDateTime.now();
         Operation expected = new Operation(1L, nowDt, 1L, OperationStatusClassifier.CREATE,
                 OperationTypeClassifier.TRANSFER, BigDecimal.TEN, null, null, null,
@@ -63,7 +63,7 @@ public class OperationServiceImplTest {
     }
 
     @Test
-    public void getById_ID2_NotExist() {
+    public void getById2NotExist() {
         OperationRepository operationRepository = mock(OperationRepository.class);
         when(operationRepository.getById(1L)).thenReturn(new Operation(1L, LocalDateTime.now(), 1L,
                 OperationStatusClassifier.CREATE, OperationTypeClassifier.TRANSFER, BigDecimal.TEN, null,

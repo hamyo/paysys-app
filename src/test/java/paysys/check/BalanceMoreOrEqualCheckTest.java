@@ -21,16 +21,16 @@ public class BalanceMoreOrEqualCheckTest {
     }
 
     @Test
-    public void check_Balance10_MoreOrEqual10() {
-        BalanceMoreOrEqualCheck check = new BalanceMoreOrEqualCheck(accountRepository);
-        String actual = check.check(1L, BigDecimal.TEN);
+    public void checkBalance10MoreOrEqualThan10() {
+        BalanceMoreOrEqualCheck checker = new BalanceMoreOrEqualCheck(accountRepository);
+        String actual = checker.check(1L, BigDecimal.TEN);
         Assert.assertEquals("", actual);
     }
 
     @Test
-    public void checkBalance10_Smaller100() {
-        BalanceMoreOrEqualCheck check = new BalanceMoreOrEqualCheck(accountRepository);
-        String actual = check.check(1L, BigDecimal.valueOf(100));
+    public void checkBalance10SmallerThan100() {
+        BalanceMoreOrEqualCheck checker = new BalanceMoreOrEqualCheck(accountRepository);
+        String actual = checker.check(1L, BigDecimal.valueOf(100));
         Assert.assertNotEquals("", actual);
     }
 }

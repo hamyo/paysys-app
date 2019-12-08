@@ -22,7 +22,7 @@ public class TransferCreateActorTest extends TestKit {
     }
 
     @Test
-    public void test_ACCOUNT1_SUM10_SENDER1_RECEIVER2_Success() {
+    public void transferSum10() {
         Operation expectedOp = Operation.ofNewTransfer(1L, BigDecimal.TEN, 1L, 2L, null)
                 .copyWithId(1L);
         OperationService operationService = mock(OperationService.class);

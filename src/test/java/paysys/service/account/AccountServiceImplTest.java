@@ -8,24 +8,26 @@ import paysys.repository.AccountRepository;
 
 import java.math.BigDecimal;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AccountServiceImplTest {
 
     @Test
-    public void getById_ID1_Exist() {
+    public void getByIdID1Exist() {
         AccountRepository accountRepository = mock(AccountRepository.class);
         when(accountRepository.getById(1L)).thenReturn(new Account(1L, BigDecimal.TEN, "address@gmail.com"));
         AccountService accountService = new AccountServiceImpl(accountRepository);
         Account expected = new Account(1L, BigDecimal.TEN, "address@gmail.com");
         Account actual = accountService.getById(expected.getId());
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void getById_ID2_NotExist() {
+    public void getByIdID2NotExist() {
         AccountRepository accountRepository = mock(AccountRepository.class);
         when(accountRepository.getById(1L)).thenReturn(new Account(1L, BigDecimal.TEN, "address@gmail.com"));
         AccountService accountService = new AccountServiceImpl(accountRepository);
@@ -41,23 +43,24 @@ public class AccountServiceImplTest {
         AccountService accountService = new AccountServiceImpl(accountRepository);
         Account expected = new Account(1L, BigDecimal.ZERO, "address@gmail.com");
         Account actual = accountService.create("address@gmail.com");
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void increaseAccountBalance_ID1_AMOUNT100() {
+    public void increaseAccountBalanceID1ByAmount100() {
         BigDecimal incAmount = BigDecimal.valueOf(100);
         AccountService accountService = new AccountServiceImpl(new AccountMemoryRepository());
         Account actual = accountService.create("address@gmail.com");
         BigDecimal startBalance = actual.getBalance();
 
         accountService.increaseAccountBalance(actual.getId(), incAmount);
+        BigDecimal expectedBalance = startBalance.add(incAmount);
         Account changed = accountService.getById(actual.getId());
-        assertEquals(0, changed.getBalance().subtract(startBalance).compareTo(incAmount));
+        assertThat(changed.getBalance(), is(expectedBalance));
     }
 
     @Test
-    public void decreaseAccountBalance_ID1_AMOUNT100() {
+    public void decreaseAccountBalanceID1ByAmount100() {
         BigDecimal incAmount = BigDecimal.valueOf(100);
         AccountRepository accRepo = new AccountMemoryRepository();
         AccountService accountService = new AccountServiceImpl(accRepo);
@@ -66,6 +69,6 @@ public class AccountServiceImplTest {
         accRepo.update(account);
         accountService.decreaseAccountBalance(account.getId(), incAmount);
         Account changed = accountService.getById(account.getId());
-        Assert.assertTrue(BigDecimal.ZERO.compareTo(changed.getBalance()) == 0);
+        assertThat(changed.getBalance(), is(BigDecimal.ZERO));
     }
 }

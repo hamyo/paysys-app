@@ -22,7 +22,7 @@ public class AddMoneyProcessingActorTest extends TestKit {
     }
 
     @Test
-    public void test_ACCOUNT1_SUM10_Success() {
+    public void addSum10ToAccount() {
         Operation operation = Operation.ofNewAddMoney(1L, BigDecimal.TEN).copyWithId(1L);
         OperationService operationService = mock(OperationService.class);
         when(operationService.getById(1L)).thenReturn(operation);

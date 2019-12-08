@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 public class AccountControllerTest {
 
     @Test
-    public void create_Email() {
+    public void createWithEmail() {
         AccountService accountService = mock(AccountService.class);
         Account expected = new Account(1L, BigDecimal.ZERO, "address@gmial.com");
         when(accountService.create("address@gmial.com")).thenReturn(expected);
@@ -41,7 +41,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void get_ID1_Exists() {
+    public void getByID1Exists() {
         AccountService accountService = mock(AccountService.class);
         Account expected = new Account(1L, BigDecimal.TEN, "address@gmial.com");
         when(accountService.getById(1L)).thenReturn(expected);
@@ -54,7 +54,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void get_ID1_NotExists() {
+    public void getByID1NotExists() {
         AccountService accountService = mock(AccountService.class);
         when(accountService.getById(1L)).thenReturn(null);
         ActorSystem system = mock(ActorSystem.class);

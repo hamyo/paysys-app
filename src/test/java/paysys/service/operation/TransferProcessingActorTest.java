@@ -22,7 +22,7 @@ public class TransferProcessingActorTest extends TestKit {
     }
 
     @Test
-    public void test_ACCOUNT1_SUM10_SENDER1_RECEIVER2_Success() {
+    public void transferSum10() {
         Operation operation = Operation.ofNewTransfer(1L, BigDecimal.TEN, 1L, 2L, null)
                 .copyWithId(1L);
         Operation recOperation = Operation.ofNewTransfer(2L, BigDecimal.TEN, 1L, 2L, operation.getId());

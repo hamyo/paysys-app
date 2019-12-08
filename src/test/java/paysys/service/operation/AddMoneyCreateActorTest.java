@@ -21,7 +21,7 @@ public class AddMoneyCreateActorTest extends TestKit {
     }
 
     @Test
-    public void test_ACCOUNT1_SUM10_Success() {
+    public void addSum10ToAccount() {
         Operation expectedOp = Operation.ofNewAddMoney(1L, BigDecimal.TEN).copyWithId(1L);
         OperationService operationService = mock(OperationService.class);
         when(operationService.save(expectedOp)).thenReturn(expectedOp);

@@ -21,16 +21,16 @@ public class AccountExistsCheckTest {
     }
 
     @Test
-    public void check_ID1_Exists() {
-        AccountExistsCheck check = new AccountExistsCheck(accountRepository);
-        String actual = check.check(1L);
+    public void checkID1Exists() {
+        AccountExistsCheck checker = new AccountExistsCheck(accountRepository);
+        String actual = checker.check(1L);
         Assert.assertEquals("", actual);
     }
 
     @Test
-    public void check_ID2_NotExists() {
-        AccountExistsCheck check = new AccountExistsCheck(accountRepository);
-        String actual = check.check(2L);
+    public void checkID2NotExists() {
+        AccountExistsCheck checker = new AccountExistsCheck(accountRepository);
+        String actual = checker.check(2L);
         Assert.assertNotEquals("", actual);
     }
 
